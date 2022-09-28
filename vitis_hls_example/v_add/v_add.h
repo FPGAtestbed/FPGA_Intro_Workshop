@@ -2,5 +2,5 @@
 
 extern "C"
 {
-    void v_add_kernel(int *A, int *B, int *OUT);
+    void v_add_kernel(double *A, double *B, double *OUT);
 }

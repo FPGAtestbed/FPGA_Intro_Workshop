@@ -1,12 +1,17 @@
 #include "v_add.h"
 #include "math.h"
 
+bool isClose(double x, double y)
+{
+    return (abs(x-y)/x) < 1e-10;
+}
+
 // This is run when C Simulation or C/RTL Co-simulation are called
 // Must return 0 for pass; any other return value is a failure (C style return codes) 
 int main()
 {
     // Declare dummy data for tests 
-    int A[N_VALS], B[N_VALS], C[N_VALS];
+    double A[N_VALS], B[N_VALS], C[N_VALS];
 
     // A = i, B = 2i, therefore expect C = 3i after kernel call
     for(int i = 0; i < N_VALS; i++)

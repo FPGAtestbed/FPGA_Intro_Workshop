@@ -1,6 +1,6 @@
 #include "v_add.h"
 
-void v_add_kernel(int *A, int B[N_VALS], int *OUT)
+void v_add_kernel(double *A, double B[N_VALS], double *OUT)
 {
     #pragma HLS interface m_axi port=A bundle=memblock1
     #pragma HLS interface m_axi port=B bundle=memblock2
