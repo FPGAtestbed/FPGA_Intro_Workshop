@@ -27,8 +27,8 @@ int main()
     int ret = 0;
     for(int i = 0; i < N_VALS; i++)
     {
-        int expect = 3*i;
-        if(C[i] != expect)
+        double expect = 3*i;
+        if(!isClose(C[i], expect))
         {
             ret = 1;
         }
