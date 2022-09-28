@@ -17,7 +17,9 @@ In the **docs** folder you'll find presentation slides that you may wish to refe
 3. How to write a Kernel
 4. How to compile a Kernel
 5. OpenCL and host side code
+
 LUNCH BREAK
+
 6. Intro to vitis_hls: C Simulation, C Synthesis/Scheduler, Co-simulation
 7. Intro to HLS pragmas
 8. HLS pragma exercises 
