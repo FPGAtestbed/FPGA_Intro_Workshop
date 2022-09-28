@@ -28,15 +28,15 @@ int main(int argc, const char **argv)
   > saxpy_kernel = cl::Kernel(program, "saxpy");
 
   // create device-side buffers (i.e. allocate device memory)
-  cl::Buffer x_d(context, CL_MEM_READ_ONLY, sizeof(double) * N, NULL, &err);
-  cl::Buffer y_d(context, CL_MEM_READ_ONLY, sizeof(double) * N, NULL, &err);
-  cl::Buffer out_d(context, CL_MEM_WRITE_ONLY, sizeof(double) * N, NULL, &err);
-      
+  cl::Buffer x_d(context, CL_MEM_READ_ONLY, BUFFER_SIZE, NULL, &err);
+  cl::Buffer y_d(context, CL_MEM_READ_ONLY, BUFFER_SIZE, NULL, &err);
+  cl::Buffer out_d(context, CL_MEM_WRITE_ONLY, BUFFER_SIZE, NULL, &err);
+
   // CREATE CORRESPONDING HOST-SIDE BUFFERS
-  double *x_h = (double *)queue.enqueueMapBuffer(x_d, CL_TRUE, CL_MAP_WRITE, 0, sizeof(double) * N);
-  double *y_h = (double *)queue.enqueueMapBuffer(y_d, CL_TRUE, CL_MAP_WRITE, 0, sizeof(double) * N);
-  double *out_h = (double *)queue.enqueueMapBuffer(out_d, CL_TRUE, CL_MAP_WRITE | CL_MAP_READ, 0, sizeof(double) * N);
-      
+  double *x_h = (double *)queue.enqueueMapBuffer(x_d, CL_TRUE, CL_MAP_WRITE, 0, BUFFER_SIZE);
+  double *y_h = (double *)queue.enqueueMapBuffer(y_d, CL_TRUE, CL_MAP_WRITE, 0, BUFFER_SIZE);
+  double *out_h = (double *)queue.enqueueMapBuffer(out_d, CL_TRUE, CL_MAP_WRITE | CL_MAP_READ, 0, BUFFER_SIZE);
+
   // LOAD DATA INTO HOST-SIDE
   for(int i = 0; i < N; i++) {
       x_h[i] = i/3.0;
