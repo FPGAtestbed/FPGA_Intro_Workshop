@@ -1,9 +1,10 @@
 #include "v_add.h"
 #include "math.h"
+#include "hls_print.h"
 
 bool isClose(double x, double y)
 {
-    return (abs(x-y)/x) < 1e-10;
+    return (abs(x-y)/x) < 1e-8;
 }
 
 // This is run when C Simulation or C/RTL Co-simulation are called
@@ -16,8 +17,8 @@ int main()
     // A = i, B = 2i, therefore expect C = 3i after kernel call
     for(int i = 0; i < N_VALS; i++)
     {
-        A[i] = i;
-        B[i] = i * 2.0;
+        A[i] = (i+1);
+        B[i] = (i+1) * 2.0;
     }
 
     // Call the kernel code like a normal C function - no openCL for C simulation
@@ -27,9 +28,12 @@ int main()
     int ret = 0;
     for(int i = 0; i < N_VALS; i++)
     {
-        double expect = 3*i;
+        double expect = 3*(i+1);
         if(!isClose(C[i], expect))
         {
+        	hls::print("element %d\n", i);
+        	hls::print("value %f\n,", C[i]);
+        	hls::print("expect %f\n", expect);
             ret = 1;
         }
     }

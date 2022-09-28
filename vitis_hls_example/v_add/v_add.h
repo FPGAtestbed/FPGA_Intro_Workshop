@@ -1,4 +1,4 @@
-#define N_VALS 100
+#define N_VALS 10
 
 extern "C"
 {
