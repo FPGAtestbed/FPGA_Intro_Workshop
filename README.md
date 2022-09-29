@@ -10,6 +10,8 @@ In the **docs** folder you'll find presentation slides that you may wish to refe
 
 **vitis_hls_example** contains some example source files which we'll use to walk you through the process of creating a Vitis HLS project, and analysing kernel performance. 
 
+The notes for the morning OpenCL/hostside session can be found online: [Hostside OpenCL Material](http://jamiejquinn.com/2022-fpga-workshop-hostside-material/index.html)
+
 ## Running order for the day 
 
 1. Introduction & Setup 
