@@ -6,7 +6,7 @@
 
 const int N = 1000;
 const int BUFFER_SIZE = N*sizeof(double);
-const std::string XCLBIN_FILE = "sum_reduction.xclbin";
+const std::string XCLBIN_FILE = "sum.xclbin";
 
 int main(int argc, const char **argv)
 {
@@ -24,7 +24,7 @@ int main(int argc, const char **argv)
   // LOAD KERNEL
   cl::KernelFunctor<
     cl::Buffer, cl::Buffer, int
-  > sum_reduction_k = cl::Kernel(program, "sum_reduction");
+  > sum_reduction_k = cl::Kernel(program, "sum_kernel");
 
   // create device-side buffers (i.e. allocate device memory)
   cl::Buffer x_d(context, CL_MEM_READ_ONLY, BUFFER_SIZE, NULL, &err);

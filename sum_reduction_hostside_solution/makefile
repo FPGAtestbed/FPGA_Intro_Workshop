@@ -13,14 +13,14 @@ all: host device emconfig
 host: $(HOST_EXE)
 
 .PHONY: device
-device: sum_reduction.xclbin
+device: sum.xclbin
 
 .PHONY: emconfig
 emconfig: emconfig.json
 
-sum_reduction.xclbin: sum_reduction.cpp
-	v++ -t $(TARGET) --config design.cfg -c -k sum_reduction -o sum_reduction.xo sum_reduction.cpp
-	v++ -t $(TARGET) --config link.cfg -l -o sum_reduction.xclbin sum_reduction.xo
+sum.xclbin: sum_kernel.cpp
+	v++ -t $(TARGET) --config design.cfg -c -k sum_kernel -o sum.xo sum_kernel.cpp
+	v++ -t $(TARGET) --config link.cfg -l sum.xo -o sum.xclbin
 
 # Building Host
 $(HOST_EXE): main.cpp
