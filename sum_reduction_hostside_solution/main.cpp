@@ -23,16 +23,16 @@ int main(int argc, const char **argv)
 
   // LOAD KERNEL
   cl::KernelFunctor<
-    cl::Buffer, cl::Buffer, cl::Buffer, double, int
+    cl::Buffer, cl::Buffer, int
   > sum_reduction_k = cl::Kernel(program, "sum_reduction");
 
   // create device-side buffers (i.e. allocate device memory)
   cl::Buffer x_d(context, CL_MEM_READ_ONLY, BUFFER_SIZE, NULL, &err);
-  cl::Buffer out_d(context, CL_MEM_WRITE_ONLY, size(double), NULL, &err);
+  cl::Buffer out_d(context, CL_MEM_WRITE_ONLY, sizeof(double), NULL, &err);
 
   // CREATE CORRESPONDING HOST-SIDE BUFFERS
   double *x_h = (double *)queue.enqueueMapBuffer(x_d, CL_TRUE, CL_MAP_WRITE, 0, BUFFER_SIZE);
-  double *out_h = (double *)queue.enqueueMapBuffer(out_d, CL_TRUE, CL_MAP_WRITE | CL_MAP_READ, 0, size(double));
+  double *out_h = (double *)queue.enqueueMapBuffer(out_d, CL_TRUE, CL_MAP_WRITE | CL_MAP_READ, 0, sizeof(double));
 
   // LOAD DATA INTO HOST-SIDE
   for(int i = 0; i < N; i++) {
@@ -54,7 +54,7 @@ int main(int argc, const char **argv)
   // SYNCHRONISE AGAIN
   queue.finish();
 
-  bool kernel_worked = (std::abs(out_d - N) < 1e-4);
+  bool kernel_worked = (std::abs(*out_h - N) < 1e-4);
 
   if (kernel_worked) {
     std::cout << "It worked!" << std::endl;
