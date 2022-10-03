@@ -1,14 +1,16 @@
-extern "C" {
-void sum_kernel(double* x, double *out, int N) {
-  
-  //create a local variable to do the sum
-  double t = 0;
+extern "C"
+{
+void sum_kernel(double *inputVector, double *sum, int N)
+{
+    //declare a local variable to do the sum
+    double t = 0;
+    
+    for(int i = 0; i < N; i++)
+    {
+        t += inputVector[i];
+    }
 
-  for(int i=0; i<N; ++i) {
-    t += x[i];
-  }
-
-  //only modify output once because it is in global memory
-  *out = t;
+    //only access the output once because it is in global memory
+    *sum = t;
 }
 }
